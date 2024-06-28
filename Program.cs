@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MovieCatalog.Data;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,16 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MovieCatalogContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MovieCatalogDbContext")));
 
+// Add controllers
+builder.Services.AddControllers();
+
+// Build the app
 var app = builder.Build();
+
+var cultureInfo = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,22 +1,49 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.navbar, .footer {
+  background-color: #000000;
+}
+
+.navbar-brand, .nav-link, .footer {
+  color: #ffffff !important;
+}
+
+.table {
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: #e50914;
+  border-color: #e50914;
+}
+
+.btn-primary:hover {
+  background-color: #b20710;
+  border-color: #b20710;
+}
+
+.display-4 {
+  color: #e50914;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
 }

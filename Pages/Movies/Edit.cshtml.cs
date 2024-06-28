@@ -30,7 +30,7 @@ namespace MovieCatalog.Pages_Movies
                 return NotFound();
             }
 
-            var movie =  await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
+            var movie = await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
                 return NotFound();
@@ -43,6 +43,7 @@ namespace MovieCatalog.Pages_Movies
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.Remove("Movie.Rating"); // Remove default validation for Rating
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -68,6 +69,7 @@ namespace MovieCatalog.Pages_Movies
 
             return RedirectToPage("./Index");
         }
+
 
         private bool MovieExists(int id)
         {

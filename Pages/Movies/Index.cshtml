@@ -1,28 +1,37 @@
 @page
+@model MovieCatalog.Pages.Movies.IndexModel
 @{
     ViewData["Title"] = "Movies";
 }
 
-<h1>Movies</h1>
+<div class="container">
+    <h1 class="display-4">Movies</h1>
 
-<p>
-    <a class="btn btn-primary" asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Genre</th>
-            <th>Rating</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody id="movies-table-body">
-        <tr>
-            <td colspan="5">Loading...</td>
-        </tr>
-    </tbody>
-</table>
+    <p>
+        <a class="btn btn-primary mb-3" asp-page="Create">Create New</a>
+    </p>
 
-<script src="~/js/movies.js"></script>
+    <div class="row">
+        @foreach (var item in Model.Movie)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="card h-100 text-white bg-dark">
+                    <img class="card-img-top" src="@item.PosterPath" alt="@item.Title" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">
+                            <strong>Release Date:</strong> @item.ReleaseDate.ToShortDateString()<br />
+                            <strong>Genre:</strong> @item.Genre<br />
+                            <strong>Rating:</strong> @item.Rating
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-sm btn-secondary" asp-page="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-sm btn-danger" asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
