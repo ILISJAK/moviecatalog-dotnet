@@ -1,0 +1,28 @@
+@page
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h1>Movies</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="movies-table-body">
+        <tr>
+            <td colspan="5">Loading...</td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/js/movies.js"></script>
