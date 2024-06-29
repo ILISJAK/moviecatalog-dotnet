@@ -1,0 +1,28 @@
+@page
+@model MovieCatalog.Pages_Movies.SortedModel
+@{
+    ViewData["Title"] = "Sorted Movies";
+}
+
+<h1>Sorted Movies</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Genre</td>
+                <td>@movie.ReleaseDate.ToShortDateString()</td>
+                <td>@movie.Rating</td>
+            </tr>
+        }
+    </tbody>
+</table>

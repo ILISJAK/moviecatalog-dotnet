@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MovieCatalog.Data;
 using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,13 +22,30 @@ builder.Services.AddDbContext<MovieCatalogContext>(options =>
 // Add controllers
 builder.Services.AddControllers();
 
-// Build the app
+// Add localization services
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+// Configure localization options
+var supportedCultures = new[]
+{
+    new CultureInfo("hr"),
+    new CultureInfo("en-US")
+};
+
 var app = builder.Build();
 
+// Configure the localization middleware
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("hr"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
+
+// Set the default culture for threads in the application
 var cultureInfo = new CultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

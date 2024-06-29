@@ -1,0 +1,40 @@
+@page
+@model MovieCatalog.Pages_Movies.FilterModel
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.SharedResource> Localizer
+@{
+    ViewData["Title"] = Localizer["Filter"];
+}
+
+<h1>@Localizer["Filter"]</h1>
+<form method="get">
+    <div class="form-group">
+        <label for="genre">@Localizer["Genre"]</label>
+        <input type="text" id="genre" name="genre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="@Localizer["Filter"]" class="btn btn-primary" />
+    </div>
+</form>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Localizer["Title"]</th>
+            <th>@Localizer["Genre"]</th>
+            <th>@Localizer["Release Date"]</th>
+            <th>@Localizer["Rating"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Genre</td>
+                <td>@movie.ReleaseDate.ToShortDateString()</td>
+                <td>@movie.Rating</td>
+            </tr>
+        }
+    </tbody>
+</table>

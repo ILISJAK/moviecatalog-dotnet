@@ -7,11 +7,33 @@
 <div class="container">
     <h1 class="display-4">Movies</h1>
 
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" id="genre-filter" class="form-control" placeholder="Filter by genre..." />
+        </div>
+        <div class="col-md-4">
+            <select id="sort-options" class="form-control">
+                <option value="title">Sort by Title</option>
+                <option value="releaseDate">Sort by Release Date</option>
+                <option value="rating">Sort by Rating</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+        </div>
+    </div>
+
     <p>
         <a class="btn btn-primary mb-3" asp-page="Create">Create New</a>
     </p>
 
-    <div class="row">
+    <div class="row justify-content-center" id="loading-spinner" style="display: none;">
+        <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="row" id="movies-container">
         @foreach (var item in Model.Movie)
         {
             <div class="col-md-3 mb-3">
@@ -35,3 +57,7 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/movies.js"></script>
+}
