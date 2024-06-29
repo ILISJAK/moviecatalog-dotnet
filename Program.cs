@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieCatalog.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,15 +33,21 @@ var supportedCultures = new[]
     new CultureInfo("en-US")
 };
 
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+});
+
+// Build the app
 var app = builder.Build();
 
-// Configure the localization middleware
-app.UseRequestLocalization(new RequestLocalizationOptions
-{
-    DefaultRequestCulture = new RequestCulture("hr"),
-    SupportedCultures = supportedCultures,
-    SupportedUICultures = supportedCultures
-});
+// Use localization middleware
+var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
+if (localizationOptions != null)
+    app.UseRequestLocalization(localizationOptions);
 
 // Set the default culture for threads in the application
 var cultureInfo = new CultureInfo("en-US");

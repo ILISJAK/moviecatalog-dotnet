@@ -1,0 +1,17 @@
+@page
+@model MovieCatalog.Pages.LocalizationDebugModel
+@{
+    ViewData["Title"] = "Localization Debug";
+}
+
+<h1>Localization Debug</h1>
+
+<p>Request culture: @Model.CurrentCulture</p>
+
+<h2>Localized Strings</h2>
+<ul>
+    <li>MovieCatalog: @Model.MovieCatalog</li>
+    <li>Home: @Model.Home</li>
+    <li>Movies: @Model.Movies</li>
+    <li>Privacy: @Model.Privacy</li>
+</ul>
