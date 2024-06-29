@@ -37,7 +37,7 @@
         @foreach (var item in Model.Movie)
         {
             <div class="col-md-3 mb-3">
-                <div class="card h-100 text-white bg-dark">
+                <div class="card h-100 text-white bg-dark" onclick="location.href='@Url.Page("/Movies/Details", new { id = item.Id })'">
                     <img class="card-img-top" src="@item.PosterPath" alt="@item.Title" />
                     <div class="card-body">
                         <h5 class="card-title">@item.Title</h5>
@@ -47,10 +47,10 @@
                             <strong>Rating:</strong> @item.Rating
                         </p>
                     </div>
-                    <div class="card-footer">
-                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-sm btn-secondary" asp-page="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-sm btn-danger" asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@item.Id" onclick="event.stopPropagation();">Edit</a>
+                        <a class="btn btn-sm btn-secondary" asp-page="Details" asp-route-id="@item.Id" onclick="event.stopPropagation();">Details</a>
+                        <a class="btn btn-sm btn-danger" asp-page="Delete" asp-route-id="@item.Id" onclick="event.stopPropagation();">Delete</a>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ function renderMovies(movies) {
         const movieCard = document.createElement("div");
         movieCard.classList.add("col-md-3", "mb-3");
         movieCard.innerHTML = `
-            <div class="card h-100 text-white bg-dark">
+            <div class="card h-100 text-white bg-dark" onclick="location.href='/Movies/Details?id=${movie.id}'" style="cursor: pointer;">
                 <img class="card-img-top" src="${movie.posterPath}" alt="${movie.title}" />
                 <div class="card-body">
                     <h5 class="card-title">${movie.title}</h5>
@@ -29,9 +29,9 @@ function renderMovies(movies) {
                     </p>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-sm btn-primary" href="/Movies/Edit?id=${movie.id}">Edit</a>
-                    <a class="btn btn-sm btn-secondary" href="/Movies/Details?id=${movie.id}">Details</a>
-                    <a class="btn btn-sm btn-danger" href="/Movies/Delete?id=${movie.id}">Delete</a>
+                    <a class="btn btn-sm btn-primary" href="/Movies/Edit?id=${movie.id}" onclick="event.stopPropagation();">Edit</a>
+                    <a class="btn btn-sm btn-secondary" href="/Movies/Details?id=${movie.id}" onclick="event.stopPropagation();">Details</a>
+                    <a class="btn btn-sm btn-danger" href="/Movies/Delete?id=${movie.id}" onclick="event.stopPropagation();">Delete</a>
                 </div>
             </div>`;
         moviesContainer.appendChild(movieCard);

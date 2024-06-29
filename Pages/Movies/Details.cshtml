@@ -5,51 +5,97 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-4">
+    <div class="custom-card bg-dark text-white" style="position: relative;">
+        <img src="@Model.Movie.PosterPath" class="custom-card-img" alt="@Model.Movie.Title">
+        <div class="custom-card-img-overlay p-0">
+            <div class="custom-overlay-content d-flex flex-column h-100 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a class="btn btn-secondary" asp-page="@(Request.Headers["Referer"].ToString().Contains("/Movies/Index") ? "/Movies/Index" : "/Index")">Back</a>
+                    <h1 class="custom-card-title">@Model.Movie.Title</h1>
+                    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Movie.Id">Edit</a>
+                </div>
+                <div class="mt-auto">
+                    <dl class="row">
+                        <dt class="col-sm-3">Description</dt>
+                        <dd class="col-sm-9">@Model.Movie.Description</dd>
 
-<div>
-    <h4>Movie</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.ReleaseDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Genre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Genre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Rating)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Rating)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.PosterPath)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.PosterPath)
-        </dd>
-    </dl>
+                        <dt class="col-sm-3">Release Date</dt>
+                        <dd class="col-sm-9">@Model.Movie.ReleaseDate.ToShortDateString()</dd>
+
+                        <dt class="col-sm-3">Genre</dt>
+                        <dd class="col-sm-9">@Model.Movie.Genre</dd>
+
+                        <dt class="col-sm-3">Rating</dt>
+                        <dd class="col-sm-9">@Model.Movie.Rating</dd>
+                    </dl>
+                    <p class="card-text">Poster URL: @Model.Movie.PosterPath</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Movie.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+}
+
+<style>
+    .custom-card {
+        overflow: hidden;
+        position: relative;
+        transition: none; /* Disable the hover effect */
+    }
+
+    .custom-card-img {
+        width: 100%;
+        height: 80vh;
+        object-fit: cover;
+        transition: none; /* Disable the hover effect */
+    }
+
+    .custom-card-img-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Initial dim effect */
+        transition: background-color 0.5s;
+        color: white;
+    }
+
+    .custom-card-img-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+    }
+
+    .custom-overlay-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        color: white;
+    }
+
+    .custom-card-title {
+        font-size: 2rem;
+    }
+
+    .card-text {
+        font-size: 1.25rem;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000;
+        color: #ffffff;
+        padding: 10px 0;
+    }
+</style>
