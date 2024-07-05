@@ -71,4 +71,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 
-app.Run();
+app.Run("http://*:8080");  // Explicitly specify the URL and port
